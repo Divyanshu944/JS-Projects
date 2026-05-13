@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Image Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="main">
+        <div class="contaner">
+            <div class="upper">
+                <div class="logo-wrapper">
+                    <div class="logo">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </div>
+                    <h1>AI Image Generator</h1>
+                </div>
+                <button class="them-logo">themlogo</button>
+            </div>
+            <div class="middle">
+                <textarea name="" placeholder="Desribe your imagination in detail..." id=""></textarea>
+                <div class="suggestion-icon">sugg icon</div>
+            </div>
+            <div class="lower">
+                <div class="prompt-action">
+                    <div class="select-wrapper">
+                        <select name="" id="" class="custom-select">
+                            <option value="" selected disabled>Select Model</option>
+                            <option value="FLUX.1-dev" class="">FLUX.1-dev</option>
+                            <option value="FLUX.1-schnell" class="">FLUX.1-schnell</option>
+                            <option value="Stable Diffusion XL" class="">Stable Diffusion XL</option>
+                            <option value="Stable Diffusion v1.5" class="">Stable Diffusion v1.5</option>
+                            <option value="Stable Diffusion 3" class="">Stable Diffusion 3</option>
+                            <option value="Openjourney" class="">Openjourney</option>
+                        </select>
+                    </div>
+
+                    <div class="select-wrapper">
+                        <select name="" id="" class="image-select">
+                            <option value="" class="img" selected disabled>Image Count</option>
+                            <option value="" class="img">1 Image</option>
+                            <option value="" class="img">2 Image</option>
+                            <option value="" class="img">3 Image</option>
+                            <option value="" class="img">4 Image</option>
+                        </select>
+                    </div>
+
+                    <div class="selecte-wrapper">
+                        <select name="" id="" class="ratio-select">
+                            <option value="" class="" selected disabled>Aspect Ratio</option>
+                            <option value="" class="">Square(1:1)</option>
+                            <option value="" class="">Landscape(16:9)</option>
+                            <option value="" class="">Portrait(9:16)</option>
+                        </select>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
