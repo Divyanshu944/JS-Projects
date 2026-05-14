@@ -17,16 +17,18 @@
                     </div>
                     <h1>AI Image Generator</h1>
                 </div>
-                <button class="them-logo">themlogo</button>
+                <button class="them-logo">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
             </div>
             <div class="middle">
                 <textarea name="" placeholder="Desribe your imagination in detail..." id=""></textarea>
-                <div class="suggestion-icon">sugg icon</div>
+                <button type="button" class="suggestion-icon"><i class="fa-solid fa-dice"></i></button>
             </div>
             <div class="lower">
                 <div class="prompt-action">
                     <div class="select-wrapper">
-                        <select name="" id="" class="custom-select">
+                        <select name="" id="" class="custom-select" required>
                             <option value="" selected disabled>Select Model</option>
                             <option value="FLUX.1-dev" class="">FLUX.1-dev</option>
                             <option value="FLUX.1-schnell" class="">FLUX.1-schnell</option>
@@ -38,25 +40,29 @@
                     </div>
 
                     <div class="select-wrapper">
-                        <select name="" id="" class="image-select">
+                        <select name="" id="" class="custom-select" required>
                             <option value="" class="img" selected disabled>Image Count</option>
-                            <option value="" class="img">1 Image</option>
-                            <option value="" class="img">2 Image</option>
-                            <option value="" class="img">3 Image</option>
-                            <option value="" class="img">4 Image</option>
+                            <option value="1" class="img">1 Image</option>
+                            <option value="2" class="img">2 Image</option>
+                            <option value="3" class="img">3 Image</option>
+                            <option value="4" class="img">4 Image</option>
                         </select>
                     </div>
 
-                    <div class="selecte-wrapper">
-                        <select name="" id="" class="ratio-select">
+                    <div class="selecte-wrapper"> 
+                        
+                        <select name="" id="" class="custom-select" required>
                             <option value="" class="" selected disabled>Aspect Ratio</option>
-                            <option value="" class="">Square(1:1)</option>
-                            <option value="" class="">Landscape(16:9)</option>
-                            <option value="" class="">Portrait(9:16)</option>
+                            <option value="1/1" class="">Square(1:1)</option>
+                            <option value="16/9" class="">Landscape(16:9)</option>
+                            <option value="9/16" class="">Portrait(9:16)</option>
                         </select>
                     </div>
 
-
+                    <button type="submit" class="generate-btn">
+                        <i class="fa-solid fa-wand-sparkles"></i>
+                        Generate
+                    </button>
                 </div>
             </div>
         </div>
