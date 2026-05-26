@@ -217,3 +217,37 @@ main::before{
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(109, 40, 217, 0.3);
 }
+
+.gallary-grid {
+    display: grid;
+    gap: 15px;
+    margin-top: 30px;
+    grid-template-columns: repeat(auto-fill,minmax(180px,1fr));
+}
+
+.img-card{
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 1;
+    background: var(--color-input);
+    border: 1px solid var(--color-border);
+}
+
+.img-overlay{
+    position: relative;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: flex-end;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+}
+
+.img-download-btn{
+    height: 45px;
+    width: 45px;
+    color: #FFFFFF;
+    backdrop-filter: 5px;
+    border-radius: 50%;
+}
