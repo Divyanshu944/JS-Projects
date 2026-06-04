@@ -226,15 +226,21 @@ body{
     background: var(--color-gradient);
 }
 
+.generate-btn:disabled{
+    opacity: 0.6;
+    pointer-events: none;
+}
+
 .generate-btn:hover{
     transform: translateY(-2px);
     box-shadow: 0 4px 10px rgba(109, 40, 217, 0.3);
 }
-
+.gallary-grid:has(.img-card){
+    margin-top: 30px;
+}
 .gallary-grid {
     display: grid;
     gap: 15px;
-    margin-top: 30px;
     grid-template-columns: repeat(auto-fill,minmax(180px,1fr));
 }
 
@@ -309,6 +315,9 @@ body{
     height: 45px;
     width: 45px;
     color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     backdrop-filter: blur(5px);
     border-radius: 50%;
     border: none;

@@ -2,10 +2,12 @@ const themeToggle = document.querySelector(".them-logo");
 const promptInput = document.querySelector(".input")
 const promptForm = document.querySelector(".prompt-form")
 const promptBtn = document.querySelector(".suggestion-icon")
+const generateBtn = document.querySelector(".generate-btn")
 const modelselect = document.getElementById("model-select")
 const countselect = document.getElementById("count-select")
 const ratioselect = document.getElementById("ratio-select")
 const gridGallary = document.querySelector(".gallary-grid")
+
 
 const examplePrompts = [
   "A magic forest with glowing plants and fairy homes among giant mushrooms",
@@ -39,11 +41,88 @@ const toggleTheme = () =>{
     themeToggle.querySelector("i").className = isDarkTheme ? "fa-solid fa-sun":"fa-solid fa-moon"
 }
 
+const getImageDimension = (aspectRatio, baseSize = 512)=>{
+    const [width, height] = aspectRatio.split("/").map(Number);
+    const scaleFactor = baseSize / Math.sqrt(width*height)
+
+    let calculateWidth = Math.round(width*scaleFactor)
+    let calculateHeight = Math.round(height*scaleFactor)
+
+    calculateWidth = Math.floor(calculateWidth/16)*16;
+    calculateHeight = Math.floor(calculateHeight/16)*16;
+
+    return{ width : calculateWidth , height:calculateHeight }
+}
+
+const updateImageCard = (imgIndex, imgUrl)=>{
+    const imgCard = document.getElementById(`img-card-${imgIndex}`);
+    if(!imgCard) return;
+
+    imgCard.classList.remove("loading");
+    imgCard.innerHTML = ` <img src="${imgUrl}" class="result-img" alt="">
+                        <div class="image-overlay">
+                            <a href="${imgUrl}" class="img-download-btn" download = "${Date.now}.png">
+                                <i class="fa-solid fa-download"></i>
+                            </a>
+                        </div>`;
+}
+
+const generateImage = async (selectModel,imageCount, aspectRatio,promptText) => {
+    const MODEL_URL = `https://api-inference.huggingface.co/models/${selectModel}`;
+    const {width, height} = getImageDimension(aspectRatio);
+    generateBtn.setAttribute("disabled", "true")
+
+    const imagePromises = Array.from({length: imageCount}, async(_, i)=> {
+        try {
+            const response = await fetch(MODEL_URL , {
+                headers: {
+                        Authorization: `Bearer ${API_KEY}`,
+                        "Content-Type": "application/json",
+                    },
+                    method: "POST",
+                    body: JSON.stringify({
+                        inputs: promptText,
+                        parameters: {width, height},
+                        options: {
+                                   wait_for_model: true,
+                                   use_cache: false
+                                }
+                    }),
+            })
+        if(!response.ok) throw new Error((await response.json())?.error)
+
+        const result = await response.blob();
+        updateImageCard(i, URL.createObjectURL(result))
+        
+        }catch(error){
+            console.log(error);
+            const imgCard = document.getElementById(`img-card-${i}`);
+            imgCard.classList.replace("loading", "error");
+            imgCard.querySelector(".status-text").textContent = "Generating Failed!"
+
+        }
+
+    })
+    await Promise.allSettled(imagePromises)
+    generateBtn.removeAttribute("disabled")
+
+}
+
 const  createImageCards = (selectModel,imageCount, aspectRatio,promptText) =>{
+    gridGallary.innerHTML = "";
+
     for (let i = 0; i < imageCount; i++) {
-        const element = array[i];
+        gridGallary.innerHTML += `<div class="img-card loading" id="img-card-${i}" style = "aspect-ratio: ${aspectRatio}">
+                        <div class="status-container">
+                            <div class="spinner"></div>
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                            <p class="status-text">Generating...</p>
+                        </div>
+                    </div>`
         
     }
+
+    generateImage(selectModel,imageCount, aspectRatio,promptText)
 }
 
 const handleFormSubmit = (e)=>{
